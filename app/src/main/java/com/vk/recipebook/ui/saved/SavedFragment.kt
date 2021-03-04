@@ -1,4 +1,4 @@
-package com.vk.recipebook.ui.notifications
+package com.vk.recipebook.ui.saved
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -10,9 +10,9 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.vk.recipebook.R
 
-class NotificationsFragment : Fragment() {
+class SavedFragment : Fragment() {
 
-    private lateinit var notificationsViewModel: NotificationsViewModel
+    private lateinit var notificationsViewModel: SavedViewModel
 
     override fun onCreateView(
             inflater: LayoutInflater,
@@ -20,12 +20,12 @@ class NotificationsFragment : Fragment() {
             savedInstanceState: Bundle?
     ): View? {
         notificationsViewModel =
-                ViewModelProvider(this).get(NotificationsViewModel::class.java)
-        val root = inflater.inflate(R.layout.fragment_notifications, container, false)
-        val textView: TextView = root.findViewById(R.id.text_notifications)
+                ViewModelProvider(this).get(SavedViewModel::class.java)
+        val root = inflater.inflate(R.layout.fragment_saved, container, false)
+        /*val textView: TextView = root.findViewById(R.id.text_notifications)
         notificationsViewModel.text.observe(viewLifecycleOwner, Observer {
             textView.text = it
-        })
+        })*/
         return root
     }
 }

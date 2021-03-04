@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.recipes.RecipesFragment">
+
+
+    <EditText
+        android:id="@+id/searchEditText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:text="Search"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="16dp"
+        tools:layout_editor_absoluteX="36dp"
+        tools:layout_editor_absoluteY="26dp" />
+
+    <Button
+        android:id="@+id/buttonFilters"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Filters"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        tools:layout_editor_absoluteX="288dp"
+        tools:layout_editor_absoluteY="24dp" />
+
+    <Button
+        android:id="@+id/allCuisinesButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="All"
+        android:layout_marginStart="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/italianCuisineButton"
+        app:layout_constraintTop_toBottomOf="@+id/searchEditText"
+        tools:layout_editor_absoluteX="35dp"
+        tools:layout_editor_absoluteY="93dp"
+        android:layout_marginTop="16dp"
+        />
+
+    <Button
+        android:id="@+id/italianCuisineButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Italian"
+        app:layout_constraintStart_toEndOf="@+id/allCuisinesButton"
+        app:layout_constraintEnd_toStartOf="@+id/frenchCuisineButton"
+        app:layout_constraintTop_toBottomOf="@+id/searchEditText"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="16dp"
+        tools:layout_editor_absoluteX="154dp"
+        tools:layout_editor_absoluteY="94dp" />
+
+    <Button
+        android:id="@+id/frenchCuisineButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="French"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="16dp"
+        app:layout_constraintStart_toEndOf="@+id/italianCuisineButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/searchEditText"
+        tools:layout_editor_absoluteX="277dp"
+        tools:layout_editor_absoluteY="92dp" />
+
+    <TextView
+        android:id="@+id/popularRecipesTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Popular Recipes"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/allCuisinesButton"
+        tools:layout_editor_absoluteX="37dp"
+        tools:layout_editor_absoluteY="158dp" />
+
+    <ImageView
+        android:id="@+id/recipe1ImageView"
+        android:layout_width="139dp"
+        android:layout_height="145dp"
+        android:src="@drawable/ic_baseline_fastfood_24"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/popularRecipesTextView"
+        tools:layout_editor_absoluteX="35dp"
+        tools:layout_editor_absoluteY="215dp" />
+
+    <ImageView
+        android:id="@+id/recipe2ImageView"
+        android:layout_width="131dp"
+        android:layout_height="133dp"
+        android:src="@drawable/ic_baseline_fastfood_24"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/popularRecipesTextView"
+        tools:layout_editor_absoluteX="232dp"
+        tools:layout_editor_absoluteY="222dp" />
+
+    <ImageView
+        android:id="@+id/recipe3ImageView"
+        android:layout_width="138dp"
+        android:layout_height="143dp"
+        android:src="@drawable/ic_baseline_fastfood_24"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/recipe1ImageView"
+        tools:layout_editor_absoluteX="39dp"
+        tools:layout_editor_absoluteY="393dp" />
+
+    <ImageView
+        android:id="@+id/recipe4ImageView"
+        android:layout_width="143dp"
+        android:layout_height="146dp"
+        android:src="@drawable/ic_baseline_fastfood_24"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/recipe2ImageView"
+        tools:layout_editor_absoluteX="231dp"
+        tools:layout_editor_absoluteY="396dp" />
+</androidx.constraintlayout.widget.ConstraintLayout>
