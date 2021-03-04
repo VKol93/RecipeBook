@@ -1,16 +1,13 @@
 package com.vk.recipebook.data
 
-data class Searchparameters (
-
-    val categories: List<String>,
+data class SearchParameters (
+    val naturalLanguageQuery: String,
+    val categories: List<String> = emptyList(),
     val includedIngredients: List<String>,
     val excludedIngredients: List<String>,
     val diet: List<String>,
-    val occasion: List<String>,
-
+    val type: List<String>,  //meal
     val cuisine: List<String>,
-    val maxTime: Int,
-
-    val byFollowed: Boolean = false
-
+    val readyInMinutes: Int,
+    val number: Int = 20
 )
