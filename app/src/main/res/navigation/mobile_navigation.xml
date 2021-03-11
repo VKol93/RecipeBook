@@ -7,19 +7,32 @@
 
     <fragment
         android:id="@+id/navigation_recipes"
-        android:name="com.vk.recipebook.ui.cart.CartFragment"
+        android:name="com.vk.recipebook.ui.recipes.RecipesFragment"
         android:label="@string/title_home"
-        tools:layout="@layout/fragment_cart" />
+        tools:layout="@layout/fragment_recipes" >
+        <action
+            android:id="@+id/action_navigation_recipes_to_recipeDetailsFragment"
+            app:destination="@id/recipeDetailsFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_saved"
-        android:name="com.vk.recipebook.ui.recipes.RecipesFragment"
+        android:name="com.vk.recipebook.ui.saved.SavedFragment"
         android:label="@string/title_dashboard"
-        tools:layout="@layout/fragment_recipes" />
+        tools:layout="@layout/fragment_saved" />
 
     <fragment
         android:id="@+id/navigation_cart"
-        android:name="com.vk.recipebook.ui.saved.SavedFragment"
+        android:name="com.vk.recipebook.ui.cart.CartFragment"
         android:label="@string/title_notifications"
-        tools:layout="@layout/fragment_saved" />
+        tools:layout="@layout/fragment_cart" />
+    <fragment
+        android:id="@+id/recipeDetailsFragment"
+        android:name="com.vk.recipebook.ui.recipedetails.RecipeDetailsFragment"
+        android:label="fragment_recipe_details"
+        tools:layout="@layout/fragment_recipe_details" >
+        <argument
+            android:name="id"
+            app:argType="integer" />
+    </fragment>
 </navigation>

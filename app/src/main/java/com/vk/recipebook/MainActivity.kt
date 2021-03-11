@@ -22,5 +22,6 @@ class MainActivity : AppCompatActivity() {
                 R.id.navigation_recipes, R.id.navigation_saved, R.id.navigation_cart))
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
+
     }
 }
