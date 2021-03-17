@@ -27,6 +27,8 @@ class RecipesFragment : Fragment() {
         val root = inflater.inflate(
             R.layout.fragment_recipes, container, false
         )
+        //val manager = GridLayoutManager(activity, 5, GridLayoutManager.HORIZONTAL, false)
+        //binding.recipesRecyclerView.layoutManager = manager
         return root
     }
 
@@ -44,7 +46,12 @@ class RecipesFragment : Fragment() {
                           binding.progressBar.visibility = View.VISIBLE
                           val response = RemoteDataSource.searchRecipes(parameters)
                           if (response.isNotEmpty()){//
-                              val adapter = RecipesAdapter(response)
+                              val adapter = RecipesAdapter(response, object: RecipesAdapter.OnClickListener{
+                                  override fun onRegisterItemClick(id: Int) {
+                                      onItemClick(id)
+                                  }
+
+                              })
                               binding.recipesRecyclerView.adapter = adapter
                               errorTextView.text = response.toString()
                               errorTextView.visibility = View.INVISIBLE
@@ -67,7 +74,7 @@ class RecipesFragment : Fragment() {
     }
 
     private fun onItemClick(id: Int) {
-        val action = RecipesFragmentDirections.actionNavigationRecipesToRecipeDetailsFragment(id)
+         val action = RecipesFragmentDirections.actionNavigationRecipesToRecipeDetailsFragment(id)
          findNavController().navigate(action)
     }
 }

@@ -29,8 +29,8 @@
     <fragment
         android:id="@+id/recipeDetailsFragment"
         android:name="com.vk.recipebook.ui.recipedetails.RecipeDetailsFragment"
-        android:label="fragment_recipe_details"
-        tools:layout="@layout/fragment_recipe_details" >
+        android:label="Recipe"
+        tools:layout="@layout/fragment_recipe_details">
         <argument
             android:name="id"
             app:argType="integer" />

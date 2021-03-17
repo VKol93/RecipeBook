@@ -1,14 +1,16 @@
 package com.vk.recipebook.data
 
-data class Recipe ( //предоставляет АПИ
-    val source: APIs = APIs.Recipe,
+import com.vk.recipebook.dataSources.ApiRecipe.Ingredients
+
+data class Recipe (
+    val source: APIs = APIs.RecipeByWebknox,
 
     val id: Int,
     val title: String,
     val image: String = "",
 
 
-    val ingredients: List<String> = emptyList(),
+    val ingredients: List<Ingredients> = emptyList(),
     val instructions: String = "",
     val calories: Int = 0,
     val servings: Int = 0,
@@ -27,5 +29,5 @@ data class Recipe ( //предоставляет АПИ
 
 
 enum class APIs{
-    Recipe
+    RecipeByWebknox, SomeOtherAPI,
 }
