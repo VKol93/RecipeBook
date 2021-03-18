@@ -29,6 +29,6 @@ data class ResponsesFromRecipeDetails(
 
 data class Ingredients(
     var name: String,
-    var amount: Int,
+    var amount: Float,
     var unit: String
 )

@@ -26,6 +26,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/shareButton"
         android:layout_marginTop="16dp"
+        android:text="Save"
         tools:layout_editor_absoluteX="178dp"
         tools:layout_editor_absoluteY="16dp" />
 
@@ -39,7 +40,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
-
+        android:text="Share"
         tools:layout_editor_absoluteX="270dp"
         tools:layout_editor_absoluteY="18dp" />
 

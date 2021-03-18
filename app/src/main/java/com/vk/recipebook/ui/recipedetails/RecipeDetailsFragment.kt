@@ -32,8 +32,13 @@ class RecipeDetailsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         lifecycleScope.launch {
             try {
-                val response = RemoteDataSource.getRecipeDetails(id)
+                val response = RemoteDataSource.getRecipeDetails(args.id)
                 title_textView.text = response.title
+                Picasso.with(view.context)
+                    .load(response.image)
+                    .into(view.recipeImage)
+                ingredientsTextView.text = response.ingredients.toString()
+                preparationTextView.text = response.instructions
 
             }
             catch (exception: Exception){
@@ -41,13 +46,6 @@ class RecipeDetailsFragment : Fragment() {
                 exception.printStackTrace()
 
             }
-           /* val fakeResponse = Recipe(
-                source = APIs.SomeOtherAPI,
-                id = 1,
-                title = "sdfsdf")
-            Picasso.with(view.context)
-                .load(response.image)
-                .into(view.recipeImage)*/
 
         }
     }
