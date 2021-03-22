@@ -7,11 +7,16 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import com.RecipeBookApp
+import com.RecipeBookApp.Companion.db
 import com.vk.recipebook.R
+import com.vk.recipebook.data.Recipe
 import com.vk.recipebook.data.SearchParameters
 import com.vk.recipebook.dataSources.RemoteDataSource
+import com.vk.recipebook.dataSources.localdatasource.RecipeDAO
 import com.vk.recipebook.databinding.FragmentRecipesBinding
 import com.vk.recipebook.ui.cart.RecipesAdapter
+import kotlinx.android.synthetic.main.recipe_item.*
 import kotlinx.coroutines.launch
 
 class RecipesFragment : Fragment() {
@@ -24,12 +29,11 @@ class RecipesFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        val root = inflater.inflate(
-            R.layout.fragment_recipes, container, false
-        )
         //val manager = GridLayoutManager(activity, 5, GridLayoutManager.HORIZONTAL, false)
         //binding.recipesRecyclerView.layoutManager = manager
-        return root
+        return inflater.inflate(
+            R.layout.fragment_recipes, container, false
+        )
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -51,6 +55,10 @@ class RecipesFragment : Fragment() {
                                       onItemClick(id)
                                   }
 
+                                  override fun onRegisterFavoriteButtonClick(recipe: Recipe) {
+                                      onBookmarkButtonClick(recipe)
+                                  }
+
                               })
                               binding.recipesRecyclerView.adapter = adapter
                               errorTextView.text = response.toString()
@@ -69,12 +77,22 @@ class RecipesFragment : Fragment() {
                       binding.progressBar.visibility = View.INVISIBLE
                   }
               }
-
-
+    }
+    fun onBookmarkButtonClick(recipe: Recipe) {
+        lifecycleScope.launch {
+            if (recipe.isInFavorite)
+                db.recipesDAO().deleteRecipe(recipe)
+            else
+                db.recipesDAO().addRecipe(recipe)
+        }
     }
 
-    private fun onItemClick(id: Int) {
+
+    fun onItemClick(id: Int) {
          val action = RecipesFragmentDirections.actionNavigationRecipesToRecipeDetailsFragment(id)
          findNavController().navigate(action)
     }
+
+
+
 }

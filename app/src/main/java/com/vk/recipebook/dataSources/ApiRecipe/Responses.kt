@@ -1,6 +1,7 @@
 package com.vk.recipebook.dataSources.ApiRecipe
 
 import com.google.gson.annotations.SerializedName
+import com.vk.recipebook.data.Ingredient
 
 data class ResponseFromSearchRecipesResult(
         val id: Int,
@@ -23,12 +24,12 @@ data class ResponsesFromRecipeDetails(
     var glutenFree:Boolean,
     var dairyFree: Boolean,
     var servings: Int,
+    var sourceUrl:String,
     @SerializedName(value = "aggregatedLikes") var likes:Int,
-    @SerializedName(value = "extendedIngredients") var ingredients: List<Ingredients>
+    @SerializedName(value = "extendedIngredients") var ingredients: List<Ingredient>
 )
 
-data class Ingredients(
-    var name: String,
-    var amount: Float,
-    var unit: String
+
+data class ResponseForInstructions(
+    @SerializedName(value = "text") var instructions:String
 )

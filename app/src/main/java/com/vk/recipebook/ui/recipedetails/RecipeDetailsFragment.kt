@@ -19,7 +19,7 @@ import kotlinx.coroutines.launch
 
 
 class RecipeDetailsFragment : Fragment() {
-    val args: RecipeDetailsFragmentArgs by navArgs()
+    private val args: RecipeDetailsFragmentArgs by navArgs()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -33,13 +33,13 @@ class RecipeDetailsFragment : Fragment() {
         lifecycleScope.launch {
             try {
                 val response = RemoteDataSource.getRecipeDetails(args.id)
+
                 title_textView.text = response.title
                 Picasso.with(view.context)
                     .load(response.image)
                     .into(view.recipeImage)
-                ingredientsTextView.text = response.ingredients.toString()
-                preparationTextView.text = response.instructions
-
+                //ingredientsTextView.text = response.ingredients.toString()
+                //preparationTextView.text = response.instructions
             }
             catch (exception: Exception){
                 Log.d("_TAG", exception.message.toString())

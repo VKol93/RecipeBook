@@ -3,11 +3,9 @@ package com.vk.recipebook.dataSources
 import com.vk.recipebook.data.APIs
 import com.vk.recipebook.data.Recipe
 import com.vk.recipebook.data.SearchParameters
+import com.vk.recipebook.dataSources.ApiRecipe.ResponseForInstructions
 import com.vk.recipebook.dataSources.ApiRecipe.ResponseFromSearchRecipes
 import com.vk.recipebook.dataSources.ApiRecipe.ResponsesFromRecipeDetails
-import okhttp3.Call
-import okhttp3.Response
-import okhttp3.ResponseBody
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
@@ -40,6 +38,12 @@ interface Api {
     )
     @GET("recipes/{id}/information")
     suspend fun getRecipeDetails(@Path("id") id: Int): ResponsesFromRecipeDetails
+    @Headers(
+        "x-rapidapi-key: 5d094140cemsh5c766eb58516c73p1b5d0djsn9d0410a9138c",
+        "x-rapidapi-host: webknox-recipes.p.rapidapi.com"
+    )
+    @GET("recipes/extract")
+    suspend fun getInstructions(@Query ("url") url: String): ResponseForInstructions
 }
 
 object RemoteDataSource {
@@ -63,22 +67,27 @@ object RemoteDataSource {
         return result
     }
 
+    suspend fun getInstructions(url: String): String{
+        return RETROFIT_SERVICE.getInstructions(url).instructions
+    }
+
     suspend fun getRecipeDetails(id: Int): Recipe {
         val response = RETROFIT_SERVICE.getRecipeDetails(id)
-        val convertedResult = Recipe(
+        val responseInstrucrions = getInstructions(response.sourceUrl)
+        return Recipe(
             source = APIs.RecipeByWebknox,
             id = id,
             title = response.title,
             image = response.image,
             ingredients = response.ingredients,
             servings = response.servings,
-            diet = booleansToDiets(response)
+            diet = booleansToDiets(response),
+            instructions = responseInstrucrions,
+            url = response.sourceUrl
         )
-        return convertedResult
     }
 
     suspend fun searchRecipes(searchParameters: SearchParameters): List<Recipe> {
-
         val response = RETROFIT_SERVICE.searchRecipes(
             searchParameters.naturalLanguageQuery,
             searchParameters.type.joinToString(","),
