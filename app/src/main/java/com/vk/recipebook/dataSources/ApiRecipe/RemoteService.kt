@@ -73,7 +73,7 @@ object RemoteDataSource {
 
     suspend fun getRecipeDetails(id: Int): Recipe {
         val response = RETROFIT_SERVICE.getRecipeDetails(id)
-        val responseInstrucrions = getInstructions(response.sourceUrl)
+        val responseInstructions = getInstructions(response.sourceUrl)
         return Recipe(
             source = APIs.RecipeByWebknox,
             id = id,
@@ -82,7 +82,7 @@ object RemoteDataSource {
             ingredients = response.ingredients,
             servings = response.servings,
             diet = booleansToDiets(response),
-            instructions = responseInstrucrions,
+            instructions = responseInstructions,
             url = response.sourceUrl
         )
     }

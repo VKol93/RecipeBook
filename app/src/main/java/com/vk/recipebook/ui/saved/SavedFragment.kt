@@ -10,28 +10,25 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.RecipeBookApp
 import com.vk.recipebook.R
-import com.vk.recipebook.dataSources.RemoteDataSource
+import com.vk.recipebook.databinding.FragmentRecipesBinding
+import com.vk.recipebook.databinding.FragmentSavedBinding
 import com.vk.recipebook.ui.cart.RecipesAdapter
-import kotlinx.android.synthetic.main.fragment_cart.*
-import kotlinx.android.synthetic.main.recipe_item.*
+import kotlinx.android.synthetic.main.fragment_saved.*
 import kotlinx.coroutines.launch
 
 class SavedFragment : Fragment() {
 
     private lateinit var savedViewModel: SavedViewModel
+    private lateinit var binding: FragmentSavedBinding
 
     override fun onCreateView(
-            inflater: LayoutInflater,
-            container: ViewGroup?,
-            savedInstanceState: Bundle?
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
     ): View? {
         savedViewModel =
-                ViewModelProvider(this).get(SavedViewModel::class.java)
+            ViewModelProvider(this).get(SavedViewModel::class.java)
         val root = inflater.inflate(R.layout.fragment_saved, container, false)
-        /*val textView: TextView = root.findViewById(R.id.text_dashboard)
-        dashboardViewModel.text.observe(viewLifecycleOwner, Observer {
-            textView.text = it
-        })*/
         return root
     }
 
@@ -41,8 +38,8 @@ class SavedFragment : Fragment() {
             val recipes = RecipeBookApp.db.recipesDAO().getSavedRecipes()
             val filteredRecipes = recipes.filter { it.isInFavorite }
             val adapter = RecipesAdapter(filteredRecipes, null)
-            recipesRecyclerView.adapter = adapter
-            recipesRecyclerView.layoutManager = LinearLayoutManager(context)
+            savedRecyclerView.adapter = adapter
+            savedRecyclerView.layoutManager = LinearLayoutManager(context)
         }
 
         /*lifecycleScope.launch {
@@ -51,7 +48,6 @@ class SavedFragment : Fragment() {
             }
         }*/
     }
-
 
 
     /*val response = RemoteDataSource.searchRecipes(parameters)

@@ -7,7 +7,7 @@
     tools:context=".ui.cart.CartFragment">
 
     <EditText
-        android:id="@+id/testSearch"
+        android:id="@+id/searchEditText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -19,24 +19,24 @@
         tools:layout_editor_absoluteY="24dp" />
 
     <Button
-        android:id="@+id/testSearchButton"
+        android:id="@+id/searchButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         android:text="Search"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/testSearch"
+        app:layout_constraintTop_toBottomOf="@+id/searchEditText"
         tools:layout_editor_absoluteX="292dp"
         tools:layout_editor_absoluteY="24dp" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recipesRecyclerView"
+        android:id="@+id/cartRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/testSearchButton" />
+        app:layout_constraintTop_toBottomOf="@+id/searchButton" />
 
     <TextView
         android:id="@+id/errorTextView"
@@ -44,7 +44,7 @@
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/testSearchButton"
+        app:layout_constraintTop_toBottomOf="@+id/searchButton"
         tools:layout_editor_absoluteX="10dp"
         tools:layout_editor_absoluteY="172dp" />
 
@@ -53,12 +53,12 @@
         style="?android:attr/progressBarStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:layout_editor_absoluteX="46dp"
-        tools:layout_editor_absoluteY="192dp"
-        android:visibility="invisible"/>
+        tools:layout_editor_absoluteY="192dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

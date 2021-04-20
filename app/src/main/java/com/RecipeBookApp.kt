@@ -8,6 +8,7 @@ class RecipeBookApp: Application() {
     companion object {
         lateinit var db: RecipeDB
     }
+
     override fun onCreate() {
         super.onCreate()
         db = Room.databaseBuilder(applicationContext, RecipeDB::class.java, "db").build()

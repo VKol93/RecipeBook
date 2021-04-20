@@ -7,34 +7,36 @@ import androidx.room.PrimaryKey
 @Entity(tableName = "RecipesList")
 data class Recipe (
     @Ignore
-    val source: APIs = APIs.RecipeByWebknox,
+    var source: APIs = APIs.RecipeByWebknox,
 
     @PrimaryKey
-    val id: Int,
-    val title: String,
-    val image: String = "",
-    val isInFavorite: Boolean = false,
+    var id: Int = 0,
+    var title: String = "",
+    var image: String? = "",
+    var isInFavorite: Boolean = false,
 
     @Ignore
-    val ingredients: List<Ingredient> = emptyList(),
-    val instructions: String = "",
-    val calories: Int = 0,
-    val servings: Int = 0,
+    var ingredients: List<Ingredient> = emptyList(),
+    var instructions: String? = "",
+    var calories: Int = 0,
+    var servings: Int = 0,
     var url: String = "",
 
-
     @Ignore
-    val diet:List<String> = emptyList(),
+    var diet:List<String> = emptyList(),
     @Ignore
-    val occasion: List<String> = emptyList(),
-    val cuisine: String = "",
-    val time: Int = 0,
-
-
-    val likes: Int = 0
-
-)
-
+    var occasion: List<String> = emptyList(),
+    var cuisine: String = "",
+    var time: Int = 0,
+    var likes: Int = 0
+){
+    override fun equals(other: Any?): Boolean {
+        if (other is Recipe)
+            return id == other.id
+        else
+            return false
+    }
+}
 
 enum class APIs{
     RecipeByWebknox, SomeOtherAPI,
