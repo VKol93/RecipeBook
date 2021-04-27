@@ -7,14 +7,17 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
-import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.GridLayoutManager
 import com.RecipeBookApp
+import com.RecipeBookApp.Companion.db
 import com.vk.recipebook.R
-import com.vk.recipebook.databinding.FragmentRecipesBinding
+import com.vk.recipebook.data.Recipe
 import com.vk.recipebook.databinding.FragmentSavedBinding
 import com.vk.recipebook.ui.cart.RecipesAdapter
-import kotlinx.android.synthetic.main.fragment_saved.*
 import kotlinx.coroutines.launch
+
+private var searchInput: String? = null
 
 class SavedFragment : Fragment() {
 
@@ -34,26 +37,40 @@ class SavedFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding = FragmentSavedBinding.bind(view)
         lifecycleScope.launch {
-            val recipes = RecipeBookApp.db.recipesDAO().getSavedRecipes()
-            val filteredRecipes = recipes.filter { it.isInFavorite }
-            val adapter = RecipesAdapter(filteredRecipes, null)
-            savedRecyclerView.adapter = adapter
-            savedRecyclerView.layoutManager = LinearLayoutManager(context)
+            getRecipiesFromDbAndDisplay()
+            binding.savedSearchEditText.setText(searchInput)
         }
-
-        /*lifecycleScope.launch {
-            favoriteImageView.setOnClickListener {
-                val recipes = RemoteDataSource.searchRecipes()
-            }
-        }*/
+        binding.savedRecyclerView.layoutManager = GridLayoutManager(context, 2)
+        binding.savedSearchEditText.setText(searchInput)
     }
 
+    fun onBookmarkButtonClick(recipe: Recipe) {
+        lifecycleScope.launch {
+            if (recipe.isInFavorite)
+                db.recipesDAO().deleteRecipe(recipe)
+            getRecipiesFromDbAndDisplay()
+        }
+    }
 
-    /*val response = RemoteDataSource.searchRecipes(parameters)
-        val adapter = RecipesAdapter(object: RecipesAdapter.OnClickListener{
+    private suspend fun getRecipiesFromDbAndDisplay() {
+        val recipes = db.recipesDAO().getSavedRecipes()
+        val filteredRecipes = recipes.filter { it.isInFavorite }
+        val adapter = RecipesAdapter(filteredRecipes, object : RecipesAdapter.OnClickListener {
             override fun onRegisterItemClick(id: Int) {
                 onItemClick(id)
             }
-    }*/
+
+            override fun onRegisterFavoriteButtonClick(recipe: Recipe) {
+                onBookmarkButtonClick(recipe)
+            }
+        })
+        binding.savedRecyclerView.adapter = adapter
+    }
+
+    fun onItemClick(id: Int) {
+        val action = SavedFragmentDirections.actionNavigationSavedToRecipeDetailsFragment(id)
+        findNavController().navigate(action)
+    }
 }

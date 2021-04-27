@@ -50,7 +50,7 @@ class RecipesFragment : Fragment() {
                     }
                 })
             binding.recipesRecyclerView.adapter = adapter
-            binding.searchButton.setText(searchInput)
+            binding.searchEditText.setText(searchInput)
         }
 
         binding.recipesRecyclerView.layoutManager = GridLayoutManager(context, 2)
@@ -58,13 +58,13 @@ class RecipesFragment : Fragment() {
 
         binding.searchButton.setOnClickListener {
             lifecycleScope.launch {
-                val parameters = SearchParameters(binding.searchButton.text.toString())
+                val parameters = SearchParameters(binding.searchEditText.text.toString())
                 try {
                     binding.progressBar.visibility = View.VISIBLE
 
                     val recipesList = RemoteDataSource.searchRecipes(parameters)
                     lastSearchRecipes = recipesList
-                    searchInput = binding.searchButton.text.toString()
+                    searchInput = binding.searchEditText.text.toString()
                     if (recipesList.isNotEmpty()) {
                         val convertedRecipesList = convertedRecipes(recipesList)
                         val adapter = RecipesAdapter(

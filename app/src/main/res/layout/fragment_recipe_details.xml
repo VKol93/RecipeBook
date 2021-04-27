@@ -22,7 +22,7 @@
         android:textSize="32sp"/>
 
     <Button
-        android:id="@+id/favorite_button"
+        android:id="@+id/save_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/ic_baseline_favorite_border_24"
@@ -43,7 +43,7 @@
         app:layout_constraintTop_toBottomOf="@+id/title_textView"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        app:layout_constraintStart_toEndOf="@+id/favorite_button"
+        app:layout_constraintStart_toEndOf="@+id/save_button"
         android:text="Share"
         tools:layout_editor_absoluteX="270dp"
         tools:layout_editor_absoluteY="18dp" />
@@ -53,7 +53,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/ic_baseline_fastfood_24"
-        app:layout_constraintTop_toBottomOf="@+id/favorite_button"
+        app:layout_constraintTop_toBottomOf="@+id/save_button"
         app:layout_constraintStart_toStartOf="parent"
         android:layout_marginTop="16dp"
         android:layout_marginStart="16dp"
@@ -83,4 +83,14 @@
         android:layout_marginStart="16dp"
         tools:layout_editor_absoluteX="28dp"
         tools:layout_editor_absoluteY="205dp" />
+
+    <Button
+        android:id="@+id/addToCartButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Add to cart"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/preparationTextView"
+        tools:layout_editor_absoluteX="303dp"
+        tools:layout_editor_absoluteY="240dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>

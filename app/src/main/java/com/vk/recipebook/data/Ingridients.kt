@@ -10,7 +10,7 @@ data class Ingredient(
     var name: String = "",
     var amount: Float = 0f,
     var unit: String = ""
-): Any() {
+) {
     override fun toString(): String {
         return if (amount % 1 == 0f)
             "${amount.roundToInt()} $unit $name"
