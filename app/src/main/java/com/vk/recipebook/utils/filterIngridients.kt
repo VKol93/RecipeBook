@@ -12,7 +12,7 @@ fun filterIngredients(ingredients: List<Ingredient>): List<Ingredient>{
                 filteredIngredient.amount += ingredient.amount
             }
         if (!find)
-            filteredIngredients.add(ingredient)
+            filteredIngredients.add(ingredient.copy())
     }
     return filteredIngredients
 }

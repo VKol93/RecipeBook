@@ -25,6 +25,8 @@ class CartFragment : Fragment() {
 
     private lateinit var binding: FragmentCartBinding
 
+    var ingredients = emptyList<Ingredient>()
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -36,29 +38,28 @@ class CartFragment : Fragment() {
         )
         return root
     }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentCartBinding.bind(view)
         lifecycleScope.launch {
-            val ingredients = db.cartDAO().getIngredients()
-            val adapter = CartAdapter(ingredients)
-            binding.cartParentRecyclerView.adapter = adapter
-
-            binding.switcher.setOnCheckedChangeListener { buttonView, isChecked ->
-                if (isChecked) {
-                    val filteredIngredients = filterIngredients(ingredients)
-                    val adapter = CartAdapter(filteredIngredients)
-                    binding.cartParentRecyclerView.adapter = adapter
-                } else {
-                    lifecycleScope.launch {
-                        val ingredients = db.cartDAO().getIngredients()
-                        val adapter = CartAdapter(ingredients)
-                        binding.cartParentRecyclerView.adapter = adapter
-                    }
-                }
-            }
-
+            ingredients = db.cartDAO().getIngredients()
+            displayIngredients(ingredients)
         }
+        binding.switcher.setOnCheckedChangeListener { buttonView, isChecked ->
+           /*if (isChecked) {
+                val filteredIngredients = filterIngredients(ingredients)
+                displayIngredients(filteredIngredients)
+            } else {
+                displayIngredients(ingredients)
+            }*/
+            val ingredientsToDisplay = if (isChecked) filterIngredients(ingredients) else ingredients
+            displayIngredients(ingredientsToDisplay)
+        }
+    }
 
+    fun displayIngredients (ingredients: List<Ingredient>){
+        val adapter = CartAdapter(ingredients)
+        binding.cartParentRecyclerView.adapter = adapter
     }
 }
