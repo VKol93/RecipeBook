@@ -5,7 +5,9 @@ import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
+import android.view.View.VISIBLE
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
 import com.RecipeBookApp.Companion.db
@@ -44,15 +46,16 @@ class RecipeDetailsFragment : Fragment() {
                 preparationTextView.text = recipe.instructions
 
                 if(recipe.isInFavorite)
-                    binding.saveButton.visibility = View.VISIBLE
-                else
                     binding.saveButton.visibility = View.INVISIBLE
+                else
+                    binding.saveButton.visibility = VISIBLE
                 binding.addToCartButton.setOnClickListener {
                     lifecycleScope.launch {
                         val ingredients = recipe.ingredients
                         for(ingredient in ingredients)
                             db.cartDAO().addIngredient(ingredient)
                     }
+                    Toast.makeText(context, "Added!", Toast.LENGTH_LONG).show()
                 }
 
             }

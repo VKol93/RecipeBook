@@ -8,8 +8,10 @@ import com.vk.recipebook.R
 import com.vk.recipebook.data.Ingredient
 import com.vk.recipebook.data.Recipe
 import com.vk.recipebook.databinding.CartItemBinding
+import com.vk.recipebook.utils.filterIngredients
 
 class CartAdapter(val ingredients: List<Ingredient>):RecyclerView.Adapter<CartViewHolder>(){
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CartViewHolder {
         return CartViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.cart_item, parent, false))
     }
@@ -25,15 +27,13 @@ class CartAdapter(val ingredients: List<Ingredient>):RecyclerView.Adapter<CartVi
     interface onClickListener {
         fun onRegisterItemClick(id:Int)
     }
+
 }
 
 class CartViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
     fun bind(ingredient: Ingredient){
         val binding = CartItemBinding.bind(itemView)
-
         binding.amountTextView.text = ingredient.toString()
-/*        binding.nameTextView.text = ingredient.name
-        binding.unitTextView.text = ingredient.unit*/
     }
 }
 
