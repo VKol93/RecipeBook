@@ -22,7 +22,7 @@
         android:textSize="32sp"/>
 
     <Button
-        android:id="@+id/save_button"
+        android:id="@+id/saveButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/ic_baseline_favorite_border_24"
@@ -30,6 +30,7 @@
         app:layout_constraintEnd_toStartOf="@+id/shareButton"
         android:layout_marginTop="16dp"
         android:text="Save"
+        android:visibility="invisible"
         app:layout_constraintStart_toStartOf="parent"
         tools:layout_editor_absoluteX="178dp"
         tools:layout_editor_absoluteY="16dp" />
@@ -43,7 +44,7 @@
         app:layout_constraintTop_toBottomOf="@+id/title_textView"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        app:layout_constraintStart_toEndOf="@+id/save_button"
+        app:layout_constraintStart_toEndOf="@+id/saveButton"
         android:text="Share"
         tools:layout_editor_absoluteX="270dp"
         tools:layout_editor_absoluteY="18dp" />
@@ -53,7 +54,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/ic_baseline_fastfood_24"
-        app:layout_constraintTop_toBottomOf="@+id/save_button"
+        app:layout_constraintTop_toBottomOf="@+id/saveButton"
         app:layout_constraintStart_toStartOf="parent"
         android:layout_marginTop="16dp"
         android:layout_marginStart="16dp"

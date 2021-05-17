@@ -5,6 +5,7 @@ import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
+import android.view.View.INVISIBLE
 import android.view.View.VISIBLE
 import android.view.ViewGroup
 import android.widget.Toast
@@ -15,6 +16,7 @@ import com.squareup.picasso.Picasso
 import com.vk.recipebook.R
 import com.vk.recipebook.dataSources.RemoteDataSource
 import com.vk.recipebook.databinding.FragmentRecipeDetailsBinding
+import com.vk.recipebook.utils.favoriteCheckRecipe
 import kotlinx.android.synthetic.main.fragment_recipe_details.*
 import kotlinx.android.synthetic.main.fragment_recipe_details.view.*
 import kotlinx.coroutines.launch
@@ -26,7 +28,6 @@ class RecipeDetailsFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_recipe_details, container, false)
     }
 
@@ -36,6 +37,7 @@ class RecipeDetailsFragment : Fragment() {
         lifecycleScope.launch {
             try {
                 val recipe = RemoteDataSource.getRecipeDetails(args.id)
+                val favoriteCheckRecipe = favoriteCheckRecipe(recipe)
 
                 title_textView.text = recipe.title
                 Picasso.with(view.context)
@@ -45,10 +47,11 @@ class RecipeDetailsFragment : Fragment() {
 
                 preparationTextView.text = recipe.instructions
 
-                if(recipe.isInFavorite)
-                    binding.saveButton.visibility = View.INVISIBLE
+                if(favoriteCheckRecipe.isInFavorite)
+                    binding.saveButton.visibility = INVISIBLE
                 else
                     binding.saveButton.visibility = VISIBLE
+
                 binding.addToCartButton.setOnClickListener {
                     lifecycleScope.launch {
                         val ingredients = recipe.ingredients
