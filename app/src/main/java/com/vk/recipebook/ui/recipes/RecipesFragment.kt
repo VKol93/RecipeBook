@@ -44,11 +44,14 @@ class RecipesFragment : Fragment() {
             viewModel.searchRecipes(binding.searchEditText.text.toString())
         }
 
-        viewModel.recipesLiveData.observe(viewLifecycleOwner) { recipes ->
-            if (recipes.isNotEmpty())
-                displayRecipes(recipes)
-            else
-                showNoResult()
+        viewModel.recipesLiveData.observe(viewLifecycleOwner) { recipes -> // null
+            if (recipes != null) {
+                if (recipes.isNotEmpty())
+                    displayRecipes(recipes)
+                else
+                    showNoResult()
+            } else
+                showError()
         }
 
         viewModel.loadingLiveData.observe(viewLifecycleOwner) { isLoading ->
@@ -73,6 +76,7 @@ class RecipesFragment : Fragment() {
                 override fun onRegisterItemClick(id: Int) {
                     onItemClick(id)
                 }
+
                 override fun onRegisterFavoriteButtonClick(recipe: Recipe) {
                     onBookmarkButtonClick(recipe)
                 }
@@ -81,14 +85,16 @@ class RecipesFragment : Fragment() {
         binding.errorTextView.visibility = View.INVISIBLE
         binding.recipesRecyclerView.visibility = View.VISIBLE
     }
+
     fun showNoResult() {
         binding.errorTextView.text = "Sorry, no results"
         binding.recipesRecyclerView.visibility = View.INVISIBLE
         binding.errorTextView.visibility = View.VISIBLE
     }
-    fun showError(error: Exception) {
+
+    fun showError() {
         binding.errorTextView.text = "Error"
-        Log.d("recipeSearch", error.message.toString())
+        //Log.d("recipeSearch", error.message.toString())
         binding.recipesRecyclerView.visibility = View.INVISIBLE
         binding.errorTextView.visibility = View.VISIBLE
     }
