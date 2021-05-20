@@ -45,9 +45,10 @@ class RecipesFragment : Fragment() {
         }
 
         viewModel.recipesLiveData.observe(viewLifecycleOwner) { recipes ->
-            if (recipes != null) {
+            if (recipes.isNotEmpty())
                 displayRecipes(recipes)
-            }
+            else
+                showNoResult()
         }
 
         viewModel.loadingLiveData.observe(viewLifecycleOwner) { isLoading ->
@@ -55,7 +56,6 @@ class RecipesFragment : Fragment() {
                 View.VISIBLE
             else
                 View.INVISIBLE
-
         }
     }
 
@@ -66,7 +66,7 @@ class RecipesFragment : Fragment() {
         }
     }*/
 
-    fun displayRecipes (recipesList: List<Recipe>){
+    fun displayRecipes(recipesList: List<Recipe>) {
         val adapter = RecipesAdapter(
             recipesList,
             object : RecipesAdapter.OnClickListener {
@@ -86,7 +86,7 @@ class RecipesFragment : Fragment() {
         binding.recipesRecyclerView.visibility = View.INVISIBLE
         binding.errorTextView.visibility = View.VISIBLE
     }
-    fun showError(error: Exception){
+    fun showError(error: Exception) {
         binding.errorTextView.text = "Error"
         Log.d("recipeSearch", error.message.toString())
         binding.recipesRecyclerView.visibility = View.INVISIBLE
